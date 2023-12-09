@@ -1,0 +1,9 @@
+C:\Users\furka\source\repos\C#_text_analysis\C#_text_analysis\bin\Debug\C#_text_analysis.exe.config
+C:\Users\furka\source\repos\C#_text_analysis\C#_text_analysis\bin\Debug\C#_text_analysis.exe
+C:\Users\furka\source\repos\C#_text_analysis\C#_text_analysis\bin\Debug\C#_text_analysis.pdb
+C:\Users\furka\source\repos\C#_text_analysis\C#_text_analysis\obj\Debug\C#_text_analysis.csproj.AssemblyReference.cache
+C:\Users\furka\source\repos\C#_text_analysis\C#_text_analysis\obj\Debug\C__text_analysis.Properties.Resources.resources
+C:\Users\furka\source\repos\C#_text_analysis\C#_text_analysis\obj\Debug\C#_text_analysis.csproj.GenerateResource.cache
+C:\Users\furka\source\repos\C#_text_analysis\C#_text_analysis\obj\Debug\C#_text_analysis.csproj.CoreCompileInputs.cache
+C:\Users\furka\source\repos\C#_text_analysis\C#_text_analysis\obj\Debug\C#_text_analysis.exe
+C:\Users\furka\source\repos\C#_text_analysis\C#_text_analysis\obj\Debug\C#_text_analysis.pdb
