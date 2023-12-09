@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +17,7 @@ namespace C__text_analysis
         private Button buttonTemizle;
         private Label labelAnalizSonuclari;
 
-        // Analiz sonuçlarını tutmak için bir sözlük
+        
         private Dictionary<string, string> analizSonuclari = new Dictionary<string, string>
         {
             {"Letter Count", "0"},
@@ -38,7 +38,7 @@ namespace C__text_analysis
 
         private void InitializeUI()
         {
-            // Özel kontrol öğelerini form üzerine ekleyin
+            
             textBox1 = new TextBox();
             buttonAnalizEt = new Button();
             buttonTemizle = new Button();
@@ -64,14 +64,14 @@ namespace C__text_analysis
             buttonTemizle.Click += buttonTemizle_Click;
 
             labelAnalizSonuclari.Location = new System.Drawing.Point(170, 260);
-            labelAnalizSonuclari.Size = new System.Drawing.Size(400, 100);
+            labelAnalizSonuclari.Size = new System.Drawing.Size(400, 230);
             
             labelAnalizSonuclari.ForeColor = Color.Black;
             labelAnalizSonuclari.Font = new Font(labelAnalizSonuclari.Font.FontFamily, 14, FontStyle.Bold);
 
 
 
-            // Analiz sonuçlarını göster
+            
             UpdateAnalysisLabels();
         }
 
@@ -79,31 +79,31 @@ namespace C__text_analysis
         {
             string metin = textBox1.Text;
 
-            // Harf sayısı analizi
+            
             analizSonuclari["Letter Count"] = HarfSayisiniHesapla(metin).ToString();
 
-            // Kelime sayısı analizi
+            
             analizSonuclari["Word Count"] = KelimeSayisiniHesapla(metin).ToString();
 
-            // Kelime frekansı analizi
+           
             var kelimeFrekanslari = KelimeFrekanslariniHesapla(metin);
             analizSonuclari["Word Frequency"] = kelimeFrekanslari.Count.ToString();
 
-            // En çok tekrar eden kelime analizi
+            
             var enCokTekrarEdenKelime = KelimeFrekanslariIcinEnCokTekrarEdeniBul(kelimeFrekanslari);
             analizSonuclari["Most Repeated Word"] = enCokTekrarEdenKelime;
 
-            // En çok tekrar eden harf analizi
+            
             var enCokTekrarEdenHarf = HarfFrekanslariIcinEnCokTekrarEdeniBul(metin);
             analizSonuclari["Most Repeated Letter"] = enCokTekrarEdenHarf;
 
-            // Analiz sonuçlarını göster
+            
             UpdateAnalysisLabels();
         }
 
         private void buttonTemizle_Click(object sender, EventArgs e)
         {
-            // Metin kutusunu ve analiz sonuçlarını temizle
+            
             textBox1.Text = "";
             ResetAnalysisResults();
             UpdateAnalysisLabels();
@@ -111,14 +111,14 @@ namespace C__text_analysis
 
         private void UpdateAnalysisLabels()
         {
-            // Analiz sonuçlarını metin olarak oluştur
+            
             string analizSonuclariMetin = "";
             foreach (var entry in analizSonuclari)
             {
                 analizSonuclariMetin += $"{entry.Key}: {entry.Value}\n";
             }
 
-            // Analiz sonuçlarını Label kontrolüne yaz
+            
             labelAnalizSonuclari.Text = analizSonuclariMetin;
 
 
@@ -126,7 +126,7 @@ namespace C__text_analysis
 
         private void ResetAnalysisResults()
         {
-            // Analiz sonuçlarını sıfırla
+            
             foreach (var key in analizSonuclari.Keys.ToList())
             {
                 analizSonuclari[key] = "N/A";
@@ -150,17 +150,17 @@ namespace C__text_analysis
 
         private int KelimeSayisiniHesapla(string metin)
         {
-            // Boşluklara göre metni parçala ve kelime sayısını bul
+            
             string[] kelimeler = metin.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             return kelimeler.Length;
         }
 
         private Dictionary<string, int> KelimeFrekanslariniHesapla(string metin)
         {
-            // Metni küçük harfe çevir ve noktalama işaretlerini temizle
+            
             string temizMetin = new string(metin.Select(c => char.IsLetter(c) || char.IsWhiteSpace(c) ? char.ToLower(c) : ' ').ToArray());
 
-            // Boşluklara göre metni parçala ve kelime frekanslarını hesapla
+            
             string[] kelimeler = temizMetin.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             Dictionary<string, int> kelimeFrekanslari = new Dictionary<string, int>();
 
@@ -181,10 +181,10 @@ namespace C__text_analysis
 
         private string HarfFrekanslariIcinEnCokTekrarEdeniBul(string metin)
         {
-            // Metni küçük harfe çevir ve sadece harf karakterlerini al
+            
             string temizMetin = new string(metin.Where(char.IsLetter).Select(char.ToLower).ToArray());
 
-            // Harf frekanslarını hesapla
+            
             Dictionary<char, int> harfFrekanslari = new Dictionary<char, int>();
             foreach (char harf in temizMetin)
             {
@@ -198,7 +198,7 @@ namespace C__text_analysis
                 }
             }
 
-            // En çok tekrar eden harfi bul
+            
             var enCokTekrarEdenHarf = harfFrekanslari.Aggregate((x, y) => x.Value > y.Value ? x : y);
 
             return enCokTekrarEdenHarf.Key.ToString();
@@ -206,7 +206,7 @@ namespace C__text_analysis
 
         private string KelimeFrekanslariIcinEnCokTekrarEdeniBul(Dictionary<string, int> kelimeFrekanslari)
         {
-            // En çok tekrar eden kelimeyi bul
+            
             var enCokTekrarEdenKelime = kelimeFrekanslari.Aggregate((x, y) => x.Value > y.Value ? x : y);
 
             return enCokTekrarEdenKelime.Key;
