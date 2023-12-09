@@ -80,22 +80,22 @@ namespace C__text_analysis
             string metin = textBox1.Text;
 
             // Harf sayısı analizi
-            analizSonuclari["Harf Sayısı"] = HarfSayisiniHesapla(metin).ToString();
+            analizSonuclari["Letter Count"] = HarfSayisiniHesapla(metin).ToString();
 
             // Kelime sayısı analizi
-            analizSonuclari["Kelime Sayısı"] = KelimeSayisiniHesapla(metin).ToString();
+            analizSonuclari["Word Count"] = KelimeSayisiniHesapla(metin).ToString();
 
             // Kelime frekansı analizi
             var kelimeFrekanslari = KelimeFrekanslariniHesapla(metin);
-            analizSonuclari["Kelime Frekansı"] = kelimeFrekanslari.Count.ToString();
+            analizSonuclari["Word Frequency"] = kelimeFrekanslari.Count.ToString();
 
             // En çok tekrar eden kelime analizi
             var enCokTekrarEdenKelime = KelimeFrekanslariIcinEnCokTekrarEdeniBul(kelimeFrekanslari);
-            analizSonuclari["En Çok Tekrar Eden Kelime"] = enCokTekrarEdenKelime;
+            analizSonuclari["Most Repeated Word"] = enCokTekrarEdenKelime;
 
             // En çok tekrar eden harf analizi
             var enCokTekrarEdenHarf = HarfFrekanslariIcinEnCokTekrarEdeniBul(metin);
-            analizSonuclari["En Çok Tekrar Eden Harf"] = enCokTekrarEdenHarf;
+            analizSonuclari["Most Repeated Letter"] = enCokTekrarEdenHarf;
 
             // Analiz sonuçlarını göster
             UpdateAnalysisLabels();
