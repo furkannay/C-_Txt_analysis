@@ -38,7 +38,6 @@ namespace C__text_analysis
 
         private void InitializeUI()
         {
-            
             textBox1 = new TextBox();
             buttonAnalizEt = new Button();
             buttonTemizle = new Button();
@@ -49,9 +48,9 @@ namespace C__text_analysis
             Controls.Add(buttonTemizle);
             Controls.Add(labelAnalizSonuclari);
 
-            // Kontrol öğelerini konumlandır ve özelliklerini ayarla
             textBox1.Location = new System.Drawing.Point(170, 100);
             textBox1.Size = new System.Drawing.Size(400, 100);
+            
 
             buttonAnalizEt.Location = new System.Drawing.Point(200, 150);
             buttonAnalizEt.Size = new System.Drawing.Size(150, 60);
@@ -64,14 +63,13 @@ namespace C__text_analysis
             buttonTemizle.Click += buttonTemizle_Click;
 
             labelAnalizSonuclari.Location = new System.Drawing.Point(170, 260);
-            labelAnalizSonuclari.Size = new System.Drawing.Size(400, 230);
+            labelAnalizSonuclari.Size = new System.Drawing.Size(400, 130);
             
             labelAnalizSonuclari.ForeColor = Color.Black;
             labelAnalizSonuclari.Font = new Font(labelAnalizSonuclari.Font.FontFamily, 14, FontStyle.Bold);
 
 
 
-            
             UpdateAnalysisLabels();
         }
 
@@ -79,31 +77,24 @@ namespace C__text_analysis
         {
             string metin = textBox1.Text;
 
-            
             analizSonuclari["Letter Count"] = HarfSayisiniHesapla(metin).ToString();
 
-            
             analizSonuclari["Word Count"] = KelimeSayisiniHesapla(metin).ToString();
 
-           
             var kelimeFrekanslari = KelimeFrekanslariniHesapla(metin);
             analizSonuclari["Word Frequency"] = kelimeFrekanslari.Count.ToString();
 
-            
             var enCokTekrarEdenKelime = KelimeFrekanslariIcinEnCokTekrarEdeniBul(kelimeFrekanslari);
             analizSonuclari["Most Repeated Word"] = enCokTekrarEdenKelime;
 
-            
             var enCokTekrarEdenHarf = HarfFrekanslariIcinEnCokTekrarEdeniBul(metin);
             analizSonuclari["Most Repeated Letter"] = enCokTekrarEdenHarf;
 
-            
             UpdateAnalysisLabels();
         }
 
         private void buttonTemizle_Click(object sender, EventArgs e)
         {
-            
             textBox1.Text = "";
             ResetAnalysisResults();
             UpdateAnalysisLabels();
@@ -111,14 +102,12 @@ namespace C__text_analysis
 
         private void UpdateAnalysisLabels()
         {
-            
             string analizSonuclariMetin = "";
             foreach (var entry in analizSonuclari)
             {
                 analizSonuclariMetin += $"{entry.Key}: {entry.Value}\n";
             }
 
-            
             labelAnalizSonuclari.Text = analizSonuclariMetin;
 
 
@@ -126,7 +115,6 @@ namespace C__text_analysis
 
         private void ResetAnalysisResults()
         {
-            
             foreach (var key in analizSonuclari.Keys.ToList())
             {
                 analizSonuclari[key] = "N/A";
@@ -150,17 +138,14 @@ namespace C__text_analysis
 
         private int KelimeSayisiniHesapla(string metin)
         {
-            
             string[] kelimeler = metin.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             return kelimeler.Length;
         }
 
         private Dictionary<string, int> KelimeFrekanslariniHesapla(string metin)
         {
-            
             string temizMetin = new string(metin.Select(c => char.IsLetter(c) || char.IsWhiteSpace(c) ? char.ToLower(c) : ' ').ToArray());
 
-            
             string[] kelimeler = temizMetin.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             Dictionary<string, int> kelimeFrekanslari = new Dictionary<string, int>();
 
@@ -181,10 +166,8 @@ namespace C__text_analysis
 
         private string HarfFrekanslariIcinEnCokTekrarEdeniBul(string metin)
         {
-            
             string temizMetin = new string(metin.Where(char.IsLetter).Select(char.ToLower).ToArray());
 
-            
             Dictionary<char, int> harfFrekanslari = new Dictionary<char, int>();
             foreach (char harf in temizMetin)
             {
@@ -198,7 +181,6 @@ namespace C__text_analysis
                 }
             }
 
-            
             var enCokTekrarEdenHarf = harfFrekanslari.Aggregate((x, y) => x.Value > y.Value ? x : y);
 
             return enCokTekrarEdenHarf.Key.ToString();
@@ -206,7 +188,6 @@ namespace C__text_analysis
 
         private string KelimeFrekanslariIcinEnCokTekrarEdeniBul(Dictionary<string, int> kelimeFrekanslari)
         {
-            
             var enCokTekrarEdenKelime = kelimeFrekanslari.Aggregate((x, y) => x.Value > y.Value ? x : y);
 
             return enCokTekrarEdenKelime.Key;
